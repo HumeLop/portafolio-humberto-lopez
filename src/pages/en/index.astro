@@ -1,0 +1,36 @@
+---
+import About from '../../components/sections/About.astro'
+import Certifications from '../../components/sections/Certifications.astro'
+import Contact from '../../components/sections/Contact.astro'
+import Education from '../../components/sections/Education.astro'
+import Experience from '../../components/sections/Experience.astro'
+import Hero from '../../components/sections/Hero.astro'
+import Projects from '../../components/sections/Projects.astro'
+import Skills from '../../components/sections/Skills.astro'
+import Footer from '../../components/shared/Footer.astro'
+import Header from '../../components/shared/Header.astro'
+import Layout from '../../layouts/Layout.astro'
+
+const locale = (Astro.currentLocale ?? 'es') as 'es' | 'en'
+const title =
+  locale === 'es' ? 'Humberto Lopez — Fullstack Developer' : 'Humberto Lopez — Fullstack Developer'
+const description =
+  locale === 'es'
+    ? 'Ingeniero en Desarrollo y Gestión de Software especializado en Java/Spring, TypeScript, Angular, React y Python.'
+    : 'Software Development Engineer specialized in Java/Spring, TypeScript, Angular, React and Python.'
+---
+
+<Layout locale={locale} title={title} description={description}>
+  <Header />
+  <main id="main-content">
+    <Hero />
+    <About />
+    <Skills />
+    <Experience />
+    <Education />
+    <Projects />
+    <Certifications />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>
