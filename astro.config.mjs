@@ -7,7 +7,7 @@ import { defineConfig } from 'astro/config'
 export default defineConfig({
 	site: 'https://humberto-lopez.dev',
 	build: {
-		inlineStylesheets: 'auto',
+		inlineStylesheets: 'always',
 	},
 	i18n: {
 		locales: ['es', 'en'],
