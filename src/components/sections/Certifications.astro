@@ -1,38 +1,39 @@
 ---
-const certs = [
-  'React esencial',
-  'Aprende programación SQL',
-  'Introducción a AWS: Servicios principales',
-  'NodeJS: RestServer con Clean Architecture',
-  'Domina JavaScript',
-  'IoT Fundamentals: Connecting Things',
-  'NDG Linux Essentials',
-]
+import { getDict } from '../../i18n'
+
+const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
+
+const rarityColors: Record<string, string> = {
+  gold: 'text-gold',
+  silver: 'text-ink-dim',
+}
 ---
 
 <section id="certs" class="py-16">
   <div class="container">
     <div class="section-head">
       <div>
-        <p class="eyebrow">06 — Logros</p>
-        <h2 class="text-[28px] md:text-[40px] font-semibold">Certificaciones &amp; cursos</h2>
+        <p class="eyebrow">{t.certifications.eyebrow}</p>
+        <h2 class="text-[22px] md:text-[28px] font-normal">{t.certifications.title}</h2>
       </div>
-      <span class="section-index">ACHIEVEMENTS.unlocked</span>
+      <span class="section-index">{t.certifications.sectionIndex}</span>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {
-        certs.map((c, i) => (
+        t.certifications.entries.map((c, i) => (
           <div
-            class="flex items-center gap-4 py-4.5 px-5 border border-line bg-panel
-          transition-all duration-200 hover:border-violet-dim hover:translate-x-1"
+            class={`panel flex items-center gap-4 ${rarityColors[c.rarity]} scroll-reveal`}
+            style={`transition-delay:${i * 10}ms`}
           >
-            <span class="font-mono text-lg text-amber shrink-0">◆</span>
+            <span class="font-pixel text-[18px] shrink-0 hover:animate-pulsing" aria-hidden="true">
+              {c.rarity === 'gold' ? '★' : '☆'}
+            </span>
             <div>
-              <p class="font-mono text-[10px] tracking-wide text-low mb-1">
-                LOGRO {String(i + 1).padStart(2, '0')} / DESBLOQUEADO
+              <p class="font-pixel text-[7px] tracking-wider text-ink-low mb-1.5">
+                {t.certifications.achievement} {String(i + 1).padStart(2, '0')}
               </p>
-              <p class="text-[14.5px] text-hi font-medium">{c}</p>
+              <p class="text-[14px] text-ink font-medium">{c.title}</p>
             </div>
           </div>
         ))

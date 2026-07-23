@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://humberto-lopez.dev/sitemap-index.xml

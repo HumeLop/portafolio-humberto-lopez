@@ -1,51 +1,50 @@
 ---
+import { getDict } from '../../i18n'
 
+const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
 ---
 
-<section id="about" class="py-20">
+<section id="about" class="py-16">
   <div class="container">
     <div class="section-head">
       <div>
-        <p class="eyebrow">01 — Perfil</p>
-        <h2 class="text-[28px] md:text-[40px] font-semibold">Sobre mí</h2>
+        <p class="eyebrow">{t.about.eyebrow}</p>
+        <h2 class="text-[22px] md:text-[28px] font-normal">{t.about.title}</h2>
       </div>
-      <span class="section-index">SOBRE_MI.md</span>
+      <span class="section-index">{t.about.sectionIndex}</span>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-10 items-start">
-      <p class="text-[16.5px] text-mid leading-[1.85]">
-        Soy Ingeniero en Desarrollo y Gestión de Software con formación en Java (Spring), gestión de
-        bases de datos, Apex Oracle, TypeScript y el ecosistema JavaScript (Angular, Ionic, React),
-        además de Python. Me muevo cómodo en todo el stack: desde diseñar una consulta que alimenta
-        un reporte crítico para el cliente, hasta pulir el detalle de una interfaz.
+      <p class="text-[16px] text-ink-dim leading-[1.85]">
+        {t.about.bio1}
         <br /><br />
-        Disfruto trabajar en equipo tanto como programar: aprender de las personas con las que colaboro
-        y aportar mis conocimientos de la misma forma. Para mí un buen equipo se nota en el código que
-        deja atrás.
+        {t.about.bio2}
       </p>
 
       <div class="panel">
-        <p class="font-mono text-[11.5px] tracking-[0.14em] text-violet uppercase mb-4">ENFOQUE</p>
+        <p class="font-pixel text-[9px] tracking-wider text-magenta uppercase mb-4">
+          {t.about.playStyle}
+        </p>
         <ul class="flex flex-col gap-3.5 list-none m-0 p-0">
           <li
-            class="text-[13.5px] text-hi pl-4.5 relative before:content-['▹'] before:absolute before:left-0 before:text-cyan"
+            class="text-[13px] text-ink pl-5 relative before:content-['▹'] before:absolute before:left-0 before:text-cyan"
           >
-            Optimizar procesos, no solo entregar features
+            {t.about.p1}
           </li>
           <li
-            class="text-[13.5px] text-hi pl-4.5 relative before:content-['▹'] before:absolute before:left-0 before:text-cyan"
+            class="text-[13px] text-ink pl-5 relative before:content-['▹'] before:absolute before:left-0 before:text-cyan"
           >
-            Código mantenible sobre soluciones rápidas y frágiles
+            {t.about.p2}
           </li>
           <li
-            class="text-[13.5px] text-hi pl-4.5 relative before:content-['▹'] before:absolute before:left-0 before:text-cyan"
+            class="text-[13px] text-ink pl-5 relative before:content-['▹'] before:absolute before:left-0 before:text-cyan"
           >
-            Aprendizaje constante, en ambas direcciones
+            {t.about.p3}
           </li>
           <li
-            class="text-[13.5px] text-hi pl-4.5 relative before:content-['▹'] before:absolute before:left-0 before:text-cyan"
+            class="text-[13px] text-ink pl-5 relative before:content-['▹'] before:absolute before:left-0 before:text-cyan"
           >
-            Soporte real a sistemas en producción
+            {t.about.p4}
           </li>
         </ul>
       </div>

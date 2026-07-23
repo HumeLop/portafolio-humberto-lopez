@@ -1,54 +1,48 @@
 ---
-const categories = [
-  {
-    id: 'BACKEND',
-    title: 'Backend',
-    items: ['Java', 'Spring Boot', 'Python', 'PHP', 'Laravel'],
-  },
-  {
-    id: 'FRONTEND',
-    title: 'Frontend',
-    items: ['Angular', 'React', 'Vue', 'Ionic', 'TypeScript', 'JavaScript', 'HTML', 'CSS'],
-  },
-  {
-    id: 'DATA',
-    title: 'Bases de datos',
-    items: ['Oracle · Apex', 'MariaDB', 'MongoDB', 'SQL Server', 'Firebase'],
-  },
-  {
-    id: 'VCS',
-    title: 'Control de versiones',
-    items: ['Git', 'GitLab', 'GitHub'],
-  },
-  {
-    id: 'AGILE',
-    title: 'Metodologías',
-      items: ['Scrum'],
-  },
-]
+import { getDict } from '../../i18n'
+import { SKILL_STATS } from '../../lib/constants'
+
+const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
+
+const MAX_LEVEL = 10
+
+const titles: Record<string, string> = {
+  Backend: t.skills.backend,
+  Frontend: t.skills.frontend,
+  'Bases de datos': t.skills.databases,
+  'Control de versiones': t.skills.versionControl,
+  Metodologías: t.skills.methodologies,
+}
 ---
 
 <section id="skills" class="py-16">
   <div class="container">
     <div class="section-head">
       <div>
-        <p class="eyebrow">02 — Inventario</p>
-        <h2 class="text-[28px] md:text-[40px] font-semibold">Stack técnico</h2>
+        <p class="eyebrow">{t.skills.eyebrow}</p>
+        <h2 class="text-[22px] md:text-[28px] font-normal">{t.skills.title}</h2>
       </div>
-      <span class="section-index">SKILLS.tree</span>
+      <span class="section-index">{t.skills.sectionIndex}</span>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5.5">
       {
-        categories.map(cat => (
-          <div class="panel">
-            <div class="flex flex-col gap-1.5 mb-5">
-              <span class="font-mono text-[11px] text-cyan-dim tracking-wide">[{cat.id}]</span>
-              <h3 class="text-[19px] font-semibold">{cat.title}</h3>
+        SKILL_STATS.map((stat, i) => (
+          <div class="panel scroll-reveal" style={`transition-delay:${i * 10}ms`}>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-pixel text-[11px] text-gold tracking-wider">{stat.id}</span>
+              <span class="font-pixel text-[9px] text-cyan tracking-wider">Lv.{stat.level}</span>
             </div>
-            <div class="flex flex-wrap gap-2">
-              {cat.items.map(item => (
-                <span class="tag">{item}</span>
+            <h3 class="text-[16px] font-normal mb-3">{titles[stat.title] ?? stat.title}</h3>
+            <div class="stat-bar mb-4">
+              <div
+                class={`stat-bar-fill${stat.level >= 9 ? ' green' : ''}`}
+                style={`width:${(stat.level / MAX_LEVEL) * 100}%`}
+              />
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              {stat.items.map(item => (
+                <span class="tag hover:animate-pulsing">{item}</span>
               ))}
             </div>
           </div>

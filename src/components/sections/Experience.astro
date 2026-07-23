@@ -1,88 +1,57 @@
 ---
-const jobs = [
-  {
-    company: 'Stefanini México — Audi México',
-    role: 'Fullstack Developer',
-    period: 'OCT 2022 — ACTUALIDAD',
-    current: true,
-    points: [
-      'Mantenimiento, actualización y monitoreo de las aplicaciones asignadas',
-      'Soporte a sistemas en red productiva y de oficina',
-      'Corrección de errores en los diferentes aplicativos',
-      'Desarrollo de nuevas funcionalidades solicitadas por el cliente',
-      'Seguimiento y resolución de tickets levantados por el cliente',
-      'Desarrollo de consultas para reportes hacia el cliente',
-    ],
-  },
-  {
-    company: 'Teksi Technology Consultants',
-    role: 'Desarrollador Backend',
-    period: 'ENE 2022 — ABR 2022',
-    current: false,
-    points: [
-      'Desarrollo de una nueva funcionalidad en una API REST',
-      'Codificación de los diferentes métodos',
-      'Implementación del consumo de la API del lado del frontend',
-      'Generación de reportes de avance solicitados por el cliente',
-    ],
-  },
-  {
-    company: 'TMAC Corporativo',
-    role: 'Fullstack Developer',
-    period: 'MAY 2020 — SEP 2020',
-    current: false,
-    points: [
-      'Mantenimiento y soporte a la página web de la empresa',
-      'Desarrollo de una nueva sección en la página web',
-      'Instalación de servidor CentOS 7',
-      'Configuración de dominio y subdominios, y despliegue del sitio',
-    ],
-  },
-]
+import { getDict } from '../../i18n'
+
+const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
 ---
 
 <section id="experience" class="py-16">
   <div class="container">
     <div class="section-head">
       <div>
-        <p class="eyebrow">03 — Bitácora</p>
-        <h2 class="text-[28px] md:text-[40px] font-semibold">Experiencia</h2>
+        <p class="eyebrow">{t.experience.eyebrow}</p>
+        <h2 class="text-[22px] md:text-[28px] font-normal">{t.experience.title}</h2>
       </div>
-      <span class="section-index">EXPERIENCE.log</span>
+      <span class="section-index">{t.experience.sectionIndex}</span>
     </div>
 
-    <div
-      class="relative flex flex-col gap-11
-      before:content-[''] before:absolute before:left-1.75 before:top-2.5 before:bottom-2.5 before:w-px
-      before:bg-linear-to-b before:from-cyan-dim before:to-line before:to-90%"
-    >
+    <div class="relative flex flex-col gap-10">
       {
-        jobs.map(job => (
-          <div class="grid grid-cols-[16px_1fr] sm:grid-cols-[16px_1fr] gap-6.5">
-            <div class="flex justify-center pt-7.5">
-              <span
-                class={`w-3.75 h-3.75 rounded-full bg-void border-2 relative z-10 ${
-                  job.current
-                    ? 'border-cyan shadow-[0_0_0_4px_rgba(77,250,255,0.14),0_0_14px_1px_rgba(77,250,255,0.6)]'
-                    : 'border-line-bright'
-                }`}
-              />
+        t.experience.jobs.map((q, i) => (
+          <div
+            class="grid grid-cols-[20px_1fr] gap-5 scroll-reveal"
+            style={`transition-delay:${i * 50}ms`}
+          >
+            <div class="flex justify-center pt-6 hover:animate-pulsing">
+              <div class={`quest-marker ${!q.active ? 'complete' : ''}`} />
             </div>
 
             <div class="panel">
-              <div class="flex items-center justify-between gap-3 mb-1">
-                <h3 class="text-xl font-semibold">{job.company}</h3>
-                {job.current && <span class="tag text-cyan border-cyan-dim">ACTUAL</span>}
+              <div class="flex items-center justify-between gap-3 mb-1.5">
+                <h3 class="text-[15px] font-normal">{q.company}</h3>
+                {q.active ? (
+                  <span class="font-pixel text-[7px] text-green tracking-wider border-2 border-green px-2 py-0.5">
+                    {t.experience.inProgress}
+                  </span>
+                ) : (
+                  <span class="font-pixel text-[7px] text-ink-low tracking-wider border-2 border-line-bright px-2 py-0.5">
+                    {t.experience.completed}
+                  </span>
+                )}
               </div>
-              <p class="font-mono text-violet text-[13.5px] mb-1">{job.role}</p>
-              <p class="font-mono text-[11.5px] text-low tracking-wide mb-4.5">{job.period}</p>
-              <ul class="flex flex-col gap-2.5 list-none m-0 p-0">
-                {job.points.map(p => (
-                  <li class="text-sm text-mid pl-4.5 relative before:content-['›'] before:absolute before:left-0 before:text-cyan-dim">
-                    {p}
-                  </li>
-                ))}
-              </ul>
+              <p class="font-mono text-[12px] text-cyan mb-1">{q.role}</p>
+              <p class="font-mono text-[10px] text-ink-low tracking-wider mb-4">{q.period}</p>
+              <div class="border-t-2 border-line pt-3.5">
+                <p class="font-pixel text-[8px] text-gold tracking-wider mb-3">
+                  {t.experience.objectivesTitle}
+                </p>
+                <ul class="flex flex-col gap-2 list-none m-0 p-0">
+                  {q.objectives.map(o => (
+                    <li class="text-[13px] text-ink-dim pl-5 relative before:content-['☐'] before:absolute before:left-0 before:text-cyan before:text-[11px]">
+                      {o}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         ))

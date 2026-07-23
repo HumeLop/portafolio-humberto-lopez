@@ -1,60 +1,82 @@
 ---
+import { getDict } from '../../i18n'
+
+const locale = (Astro.currentLocale ?? 'es') as 'es' | 'en'
+const t = getDict(locale)
+const switchHref = locale === 'es' ? '/en/' : '/'
+const switchLabel = locale === 'es' ? 'EN' : 'ES'
+
 const links = [
-  { href: '#about', label: 'Sobre mí' },
-  { href: '#skills', label: 'Stack' },
-  { href: '#experience', label: 'Experiencia' },
-  { href: '#education', label: 'Educación' },
-  { href: '#projects', label: 'Proyectos' },
-  { href: '#certs', label: 'Logros' },
-  { href: '#contact', label: 'Contacto' },
+  { href: '#about', label: t.header.about },
+  { href: '#skills', label: t.header.stats },
+  { href: '#experience', label: t.header.quests },
+  { href: '#education', label: t.header.academy },
+  { href: '#projects', label: t.header.inventory },
+  { href: '#certs', label: t.header.trophies },
+  { href: '#contact', label: t.header.message },
 ]
 ---
 
-<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-void/72 border-b border-line">
-  <div class="container h-17 flex items-center justify-between gap-6">
-    <a href="#top" class="font-mono text-[19px] font-semibold text-hi tracking-wide shrink-0">
-      <span class="text-cyan mr-0.5">&gt;</span>HL<span
+<header class="fixed top-0 inset-x-0 z-50 bg-paper/92 border-b-2 border-line">
+  <div class="container h-16 flex items-center justify-between gap-6">
+    <a href="#top" class="font-pixel text-[11px] text-ink tracking-wider shrink-0 no-underline">
+      <span class="text-cyan">▶</span> HL<span
         class="text-cyan animate-[blink_1.1s_step-end_infinite]">_</span
       >
     </a>
 
-    <nav class="hidden md:flex items-center gap-7 flex-1 justify-center">
+    <nav class="hidden md:flex items-center gap-5 flex-1 justify-center">
       {
-        links.map((l, i) => (
+        links.map(l => (
           <a
             href={l.href}
-            class="text-[13.5px] text-mid flex items-center gap-1.5 transition-colors hover:text-cyan"
+            class="font-pixel text-[9px] text-ink-dim tracking-wider no-underline px-2 py-1 border border-transparent transition-all duration-150 hover:text-cyan hover:border-cyan hover:animate-pulsing"
           >
-            <span class="font-mono text-[11px] text-low">0{i + 1}</span>
             {l.label}
           </a>
         ))
       }
     </nav>
 
-    <div
-      class="hidden md:flex items-center gap-2 font-mono text-[11.5px] tracking-wide text-low shrink-0"
-    >
-      <span class="dot"></span>DISPONIBLE
+    <div class="hidden md:flex items-center gap-3">
+      <a
+        href={switchHref}
+        class="font-pixel text-[9px] text-gold tracking-wider no-underline px-2 py-1 border border-gold/30 hover:border-gold hover:animate-pulsing transition-all duration-150"
+      >
+        {switchLabel}
+      </a>
+      <div class="flex items-center gap-2 font-pixel text-[9px] tracking-wider text-green shrink-0">
+        <span class="dot"></span>{t.header.online}
+      </div>
     </div>
 
-    <button
-      type="button"
-      class="md:hidden flex flex-col gap-1.5 bg-transparent border-0 cursor-pointer p-1.5"
-      aria-label="Abrir menú"
-      id="navToggle"
-    >
-      <span class="w-5.5 h-0.5 bg-cyan"></span>
-      <span class="w-5.5 h-0.5 bg-cyan"></span>
-      <span class="w-5.5 h-0.5 bg-cyan"></span>
-    </button>
+    <div class="flex md:hidden items-center gap-2">
+      <a
+        href={switchHref}
+        class="font-pixel text-[8px] text-gold tracking-wider no-underline px-1.5 py-0.5 border border-gold/30"
+      >
+        {switchLabel}
+      </a>
+      <button
+        type="button"
+        class="flex flex-col gap-1.5 bg-transparent border-3 border-ink-dim p-2 cursor-pointer"
+        aria-label={t.header.menu}
+        id="navToggle"
+      >
+        <span class="w-5 h-0.75 bg-cyan"></span>
+        <span class="w-5 h-0.75 bg-cyan"></span>
+        <span class="w-5 h-0.75 bg-cyan"></span>
+      </button>
+    </div>
   </div>
 
-  <nav class="hidden flex-col bg-panel border-t border-line px-5 pb-5 pt-2" id="navMobile">
+  <nav class="hidden flex-col bg-panel border-t-3 border-line px-5 pb-5 pt-2" id="navMobile">
     {
-      links.map((l, i) => (
-        <a href={l.href} class="py-3.5 border-b border-line text-sm text-mid flex gap-2.5">
-          <span class="font-mono text-[11px] text-low">0{i + 1}</span>
+      links.map(l => (
+        <a
+          href={l.href}
+          class="menu-cursor py-3.5 border-b-2 border-line font-pixel text-[9px] text-ink-dim no-underline"
+        >
           {l.label}
         </a>
       ))

@@ -10,11 +10,19 @@ import Skills from '../components/sections/Skills.astro'
 import Footer from '../components/shared/Footer.astro'
 import Header from '../components/shared/Header.astro'
 import Layout from '../layouts/Layout.astro'
+
+const locale = (Astro.currentLocale ?? 'es') as 'es' | 'en'
+const title =
+  locale === 'es' ? 'Humberto Lopez — Fullstack Developer' : 'Humberto Lopez — Fullstack Developer'
+const description =
+  locale === 'es'
+    ? 'Ingeniero en Desarrollo y Gestión de Software especializado en Java/Spring, TypeScript, Angular, React y Python.'
+    : 'Software Development Engineer specialized in Java/Spring, TypeScript, Angular, React and Python.'
 ---
 
-<Layout>
+<Layout locale={locale} title={title} description={description}>
   <Header />
-  <main>
+  <main id="main-content">
     <Hero />
     <About />
     <Skills />

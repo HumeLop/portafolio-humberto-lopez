@@ -1,10 +1,15 @@
 ---
+import { getDict } from '../../i18n'
+
+const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
 const year = new Date().getFullYear()
 ---
 
-<footer class="border-t border-line py-8">
+<footer class="border-t-3 border-line py-8">
   <div class="container flex items-center justify-between gap-4 flex-wrap">
-    <p class="font-mono text-[12.5px] text-mid">HL_ // fullstack developer</p>
-    <p class="font-mono text-[11px] text-low">© {year} Humberto Lopez — construido con Astro</p>
+    <p class="font-pixel text-[8px] tracking-wider text-ink-dim">{t.footer.brand}</p>
+    <p class="font-mono text-[11px] text-ink-low">
+      {t.footer.credit.replace('{year}', String(year))}
+    </p>
   </div>
 </footer>

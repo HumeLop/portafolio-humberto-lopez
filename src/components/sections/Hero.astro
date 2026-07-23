@@ -1,84 +1,96 @@
 ---
+import { getDict } from '../../i18n'
 
+const locale = (Astro.currentLocale ?? 'es') as 'es' | 'en'
+const t = getDict(locale)
 ---
 
-<section class="pt-42 pb-24 min-h-[92vh] flex flex-col justify-center relative" id="top">
+<section
+  class="pt-32 sm:pt-44 pb-16 sm:pb-24 min-h-[92vh] flex flex-col justify-center relative"
+  id="top"
+>
   <div class="container grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-14 items-center">
     <div class="max-w-155">
-      <p class="eyebrow">PERFIL_DEV.exe — EN LÍNEA</p>
+      <p
+        class="font-pixel text-[9px] tracking-wider text-cyan uppercase mb-5 flex items-center gap-2 animate-fade-in"
+      >
+        <span class="animate-[blink_1s_step-end_infinite]">■</span>
+        {t.hero.tagline}
+      </p>
 
       <h1
-        class="text-[48px] md:text-[92px] leading-[0.98] font-bold my-5
-        bg-linear-to-r from-hi from-55% to-cyan to-100% bg-clip-text text-transparent"
+        class="text-[28px] sm:text-[42px] md:text-[64px] leading-[1.1] font-normal mb-3 text-ink animate-fade-in animate-delay-100"
       >
         HUMBERTO<br />LOPEZ
       </h1>
 
-      <p class="font-mono text-lg text-cyan mb-6">&gt; Fullstack Developer</p>
-
-      <p class="text-base text-mid max-w-135 mb-9">
-        Ingeniero en Desarrollo y Gestión de Software enfocado en optimizar procesos con <strong
-          class="text-hi font-semibold">Java · Spring</strong
-        >,
-        <strong class="text-hi font-semibold">TypeScript</strong>,
-        <strong class="text-hi font-semibold">Angular</strong>,
-        <strong class="text-hi font-semibold">React</strong> y
-        <strong class="text-hi font-semibold">Python</strong>. Construyo desde la base de datos
-        hasta la interfaz, con la mira puesta en soluciones que sí se sostienen en producción.
+      <p class="font-mono text-base text-cyan mb-8 animate-fade-in animate-delay-200">
+        &gt; {t.hero.role}
       </p>
 
-      <div class="flex gap-3.5 flex-wrap">
-        <a class="btn primary" href="#contact">Contactar</a>
-        <a class="btn" href="https://github.com/HumeLop" target="_blank" rel="noopener">GitHub ↗</a>
+      <p
+        class="text-[15px] text-ink-dim max-w-130 mb-9 leading-relaxed animate-fade-in animate-delay-300"
+        set:html={t.hero.bio}
+      />
+
+      <div class="flex gap-2 sm:gap-3 flex-wrap animate-fade-in animate-delay-500">
+        <a class="btn primary" href="#contact">{t.hero.btnContact}</a>
+        <a class="btn" href="https://github.com/HumeLop" target="_blank" rel="noopener noreferrer"
+          >{t.hero.btnGH}</a
+        >
         <a
           class="btn"
           href="https://www.linkedin.com/in/humberto-lopez24/"
           target="_blank"
-          rel="noopener">LinkedIn ↗</a
+          rel="noopener noreferrer">{t.hero.btnLI}</a
         >
       </div>
     </div>
 
-    <aside class="panel px-6.5 pt-6.5 pb-5.5">
+    <aside class="panel animate-fade-in-right animate-delay-400">
       <p
-        class="font-mono text-xs tracking-[0.14em] text-low uppercase mb-4.5 pb-3 border-b border-dashed border-line-bright"
+        class="font-pixel text-[9px] tracking-wider text-gold uppercase mb-5 pb-3 border-b-2 border-dashed border-line-bright"
       >
-        STATUS.log
+        {t.hero.statusTitle}
       </p>
-      <ul class="flex flex-col gap-3.5">
-        <li class="flex justify-between gap-3.5 text-[13.5px]">
-          <span class="font-mono text-violet text-[11.5px] tracking-wide shrink-0">ROL</span>
-          <span class="text-hi text-right">Fullstack Developer</span>
+      <ul class="flex flex-col gap-4">
+        <li class="flex justify-between gap-3 text-[13px]">
+          <span class="font-mono text-[10px] tracking-wider text-cyan shrink-0">{t.hero.class}</span
+          >
+          <span class="text-ink text-right">{t.hero.classVal}</span>
         </li>
-        <li class="flex justify-between gap-3.5 text-[13.5px]">
-          <span class="font-mono text-violet text-[11.5px] tracking-wide shrink-0">DESDE</span>
-          <span class="text-hi text-right">2020 en la industria</span>
+        <li class="flex justify-between gap-3 text-[13px]">
+          <span class="font-mono text-[10px] tracking-wider text-cyan shrink-0">{t.hero.level}</span
+          >
+          <span class="text-ink text-right">{t.hero.levelVal}</span>
         </li>
-        <li class="flex justify-between gap-3.5 text-[13.5px]">
-          <span class="font-mono text-violet text-[11.5px] tracking-wide shrink-0">ACTUAL</span>
-          <span class="text-hi text-right">Stefanini México — Audi</span>
+        <li class="flex justify-between gap-3 text-[13px]">
+          <span class="font-mono text-[10px] tracking-wider text-cyan shrink-0">{t.hero.guild}</span
+          >
+          <span class="text-ink text-right">{t.hero.guildVal}</span>
         </li>
-        <li class="flex justify-between gap-3.5 text-[13.5px]">
-          <span class="font-mono text-violet text-[11.5px] tracking-wide shrink-0">STACK</span>
-          <span class="text-hi text-right">Java · TS · SQL · APEX Oracle </span>
+        <li class="flex justify-between gap-3 text-[13px]">
+          <span class="font-mono text-[10px] tracking-wider text-cyan shrink-0">{t.hero.spec}</span>
+          <span class="text-ink text-right">{t.hero.specVal}</span>
         </li>
-        <li class="flex justify-between gap-3.5 text-[13.5px]">
-          <span class="font-mono text-violet text-[11.5px] tracking-wide shrink-0">MODO</span>
-          <span class="text-hi text-right">Colaborativo / mentoring</span>
+        <li class="flex justify-between gap-3 text-[13px]">
+          <span class="font-mono text-[10px] tracking-wider text-cyan shrink-0">{t.hero.align}</span
+          >
+          <span class="text-ink text-right">{t.hero.alignVal}</span>
         </li>
       </ul>
       <div
-        class="mt-5.5 pt-4 border-t border-dashed border-line-bright text-[11.5px] text-low flex items-center gap-2"
+        class="mt-5 pt-4 border-t-2 border-dashed border-line-bright font-pixel text-[7px] tracking-wider text-green flex items-center gap-2"
       >
-        <span class="dot"></span>listo para nuevos retos
+        <span class="dot"></span>{t.hero.lfg}
       </div>
     </aside>
   </div>
 
   <div
-    class="hidden md:flex absolute bottom-6.5 left-8 items-center gap-2.5 text-[10.5px] tracking-[0.2em] text-low"
+    class="hidden md:flex absolute bottom-6 left-8 items-center gap-2.5 font-pixel text-[8px] tracking-wider text-ink-low"
   >
-    <span>SCROLL</span>
-    <span class="w-10 h-px bg-linear-to-r from-cyan to-transparent"></span>
+    <span>{t.hero.scroll}</span>
+    <span class="w-10 h-0.75 bg-cyan"></span>
   </div>
 </section>

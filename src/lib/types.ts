@@ -11,18 +11,24 @@ export interface Job {
 	company: string
 	role: string
 	period: string
-	current: boolean
-	points: string[]
+	active: boolean
+	objectives: string[]
 }
 
-export interface SkillCategory {
+export interface SkillStat {
 	id: string
 	title: string
 	items: string[]
+	level: number
 }
 
 export interface SocialLink {
 	label: string
 	href: string
-	platform: string
+	platform: 'linkedin' | 'github'
+}
+
+export interface ProjectEntry {
+	id: string
+	data: Project
 }
