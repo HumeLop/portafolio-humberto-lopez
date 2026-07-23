@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets'
+import { getCollection } from 'astro:content'
+
+const projects = await getCollection('projects')
+---
+
+<section id="projects" class="py-16">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">05 — Build</p>
+        <h2 class="text-[28px] md:text-[40px] font-semibold">Proyectos destacados</h2>
+      </div>
+      <span class="section-index">PROJECTS.dir</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        projects.map(entry => (
+          <article class="panel">
+            <div
+              class="aspect-16/10 -mx-7 -mt-7 mb-5 border-b border-line flex items-center justify-center overflow-hidden
+            bg-[linear-gradient(rgba(77,250,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(77,250,255,0.05)_1px,transparent_1px),linear-gradient(135deg,#0d1420,#0a0e15)]
+            bg-size-[18px_18px,18px_18px,cover]"
+            >
+              {entry.data.image ? (
+                <Image
+                  src={entry.data.image}
+                  alt={entry.data.title}
+                  class="w-full h-full object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <span class="font-mono text-[11px] tracking-wide text-low">[ CAPTURA ]</span>
+              )}
+            </div>
+            <p class="font-mono text-[11px] text-cyan-dim tracking-wide mb-2">{entry.id}</p>
+            <h3 class="text-lg font-semibold mb-2.5">{entry.data.title}</h3>
+            <p class="text-[13.5px] text-mid mb-4.5 min-h-14.5">{entry.data.description}</p>
+            <div class="flex flex-wrap gap-1.5 mb-5">
+              {entry.data.stack.map(s => (
+                <span class="tag">{s}</span>
+              ))}
+            </div>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-[12.5px] text-cyan tracking-wide"
+              href={entry.data.url ?? '/'}
+            >
+              Ver proyecto →
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

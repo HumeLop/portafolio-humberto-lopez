@@ -1,0 +1,78 @@
+---
+const links = [
+  { href: '#about', label: 'Sobre mí' },
+  { href: '#skills', label: 'Stack' },
+  { href: '#experience', label: 'Experiencia' },
+  { href: '#education', label: 'Educación' },
+  { href: '#projects', label: 'Proyectos' },
+  { href: '#certs', label: 'Logros' },
+  { href: '#contact', label: 'Contacto' },
+]
+---
+
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-void/72 border-b border-line">
+  <div class="container h-17 flex items-center justify-between gap-6">
+    <a href="#top" class="font-mono text-[19px] font-semibold text-hi tracking-wide shrink-0">
+      <span class="text-cyan mr-0.5">&gt;</span>HL<span
+        class="text-cyan animate-[blink_1.1s_step-end_infinite]">_</span
+      >
+    </a>
+
+    <nav class="hidden md:flex items-center gap-7 flex-1 justify-center">
+      {
+        links.map((l, i) => (
+          <a
+            href={l.href}
+            class="text-[13.5px] text-mid flex items-center gap-1.5 transition-colors hover:text-cyan"
+          >
+            <span class="font-mono text-[11px] text-low">0{i + 1}</span>
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div
+      class="hidden md:flex items-center gap-2 font-mono text-[11.5px] tracking-wide text-low shrink-0"
+    >
+      <span class="dot"></span>DISPONIBLE
+    </div>
+
+    <button
+      type="button"
+      class="md:hidden flex flex-col gap-1.5 bg-transparent border-0 cursor-pointer p-1.5"
+      aria-label="Abrir menú"
+      id="navToggle"
+    >
+      <span class="w-5.5 h-0.5 bg-cyan"></span>
+      <span class="w-5.5 h-0.5 bg-cyan"></span>
+      <span class="w-5.5 h-0.5 bg-cyan"></span>
+    </button>
+  </div>
+
+  <nav class="hidden flex-col bg-panel border-t border-line px-5 pb-5 pt-2" id="navMobile">
+    {
+      links.map((l, i) => (
+        <a href={l.href} class="py-3.5 border-b border-line text-sm text-mid flex gap-2.5">
+          <span class="font-mono text-[11px] text-low">0{i + 1}</span>
+          {l.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('navToggle')
+  const mobile = document.getElementById('navMobile')
+  toggle?.addEventListener('click', () => {
+    mobile?.classList.toggle('hidden')
+    mobile?.classList.toggle('flex')
+  })
+  mobile?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobile.classList.add('hidden')
+      mobile.classList.remove('flex')
+    })
+  })
+</script>

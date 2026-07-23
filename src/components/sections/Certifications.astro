@@ -1,0 +1,42 @@
+---
+const certs = [
+  'React esencial',
+  'Aprende programación SQL',
+  'Introducción a AWS: Servicios principales',
+  'NodeJS: RestServer con Clean Architecture',
+  'Domina JavaScript',
+  'IoT Fundamentals: Connecting Things',
+  'NDG Linux Essentials',
+]
+---
+
+<section id="certs" class="py-16">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">06 — Logros</p>
+        <h2 class="text-[28px] md:text-[40px] font-semibold">Certificaciones &amp; cursos</h2>
+      </div>
+      <span class="section-index">ACHIEVEMENTS.unlocked</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {
+        certs.map((c, i) => (
+          <div
+            class="flex items-center gap-4 py-4.5 px-5 border border-line bg-panel
+          transition-all duration-200 hover:border-violet-dim hover:translate-x-1"
+          >
+            <span class="font-mono text-lg text-amber shrink-0">◆</span>
+            <div>
+              <p class="font-mono text-[10px] tracking-wide text-low mb-1">
+                LOGRO {String(i + 1).padStart(2, '0')} / DESBLOQUEADO
+              </p>
+              <p class="text-[14.5px] text-hi font-medium">{c}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
