@@ -30,6 +30,7 @@ const dict = {
 		btnContact: '▶ Contactar',
 		btnGH: 'GH ↗',
 		btnLI: 'Li ↗',
+		btnCV: 'CV ↗',
 		scroll: '▼ DESPLAZA',
 	},
 
