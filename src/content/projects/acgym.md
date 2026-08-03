@@ -1,6 +1,10 @@
 ---
-title: 'AcGym — Sistema de Gestión de Gimnasio'
-description: 'SPA para administración integral de gimnasios: gestión de miembros, pagos, membresías y usuarios con roles diferenciados. Dashboard con métricas en tiempo real, gráficos y PWA.'
+title:
+  es: 'AcGym — Sistema de Gestión de Gimnasio'
+  en: 'AcGym — Gym Management System'
+description:
+  es: 'SPA para administración integral de gimnasios: gestión de miembros, pagos, membresías y usuarios con roles diferenciados. Dashboard con métricas en tiempo real, gráficos y PWA.'
+  en: 'SPA for full gym administration: member, payment, membership and user management with differentiated roles. Dashboard with real-time metrics, charts and PWA.'
 image: '../../assets/projects/acgym.png'
 stack: ['Angular', 'TypeScript', 'Taiga UI', 'Tailwind CSS', 'Django REST Framework']
 featured: true

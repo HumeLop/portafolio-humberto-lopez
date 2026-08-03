@@ -10,13 +10,13 @@ interface Props {
 const {
   title = 'Humberto Lopez — Fullstack Developer',
   description = 'Software Development Engineer specialized in Java/Spring, TypeScript, Angular, React and Python.',
-  locale = 'es',
+  locale = 'en',
 } = Astro.props
 
 const canonical = new URL(Astro.url.pathname, Astro.site)
-const esUrl = new URL(Astro.url.pathname.replace(/^\/en\//, '/'), Astro.site)
-const enUrl = new URL(
-  Astro.url.pathname.startsWith('/en/') ? Astro.url.pathname : `/en${Astro.url.pathname}`,
+const enUrl = new URL(Astro.url.pathname.replace(/^\/es\//, '/'), Astro.site)
+const esUrl = new URL(
+  Astro.url.pathname.startsWith('/es/') ? Astro.url.pathname : `/es${Astro.url.pathname}`,
   Astro.site
 )
 ---

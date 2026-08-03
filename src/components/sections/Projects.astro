@@ -4,7 +4,8 @@ import { getCollection } from 'astro:content'
 import { getDict } from '../../i18n'
 
 const projects = (await getCollection('projects')).filter(p => p.data.featured)
-const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
+const locale = (Astro.currentLocale ?? 'en') as 'es' | 'en'
+const t = getDict(locale)
 ---
 
 <section id="projects" class="py-16">
@@ -25,7 +26,7 @@ const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
               {entry.data.image ? (
                 <Image
                   src={entry.data.image}
-                  alt={entry.data.title}
+                  alt={entry.data.title[locale]}
                   class="w-full h-full object-cover object-top"
                   loading="lazy"
                   decoding="async"
@@ -37,8 +38,8 @@ const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
               )}
             </div>
             <p class="font-mono text-[10px] text-cyan tracking-wider mb-2">{entry.id}</p>
-            <h3 class="text-[15px] font-normal mb-2.5">{entry.data.title}</h3>
-            <p class="text-[13px] text-ink-dim mb-4.5 min-h-14.5">{entry.data.description}</p>
+            <h3 class="text-[15px] font-normal mb-2.5">{entry.data.title[locale]}</h3>
+            <p class="text-[13px] text-ink-dim mb-4.5 min-h-14.5">{entry.data.description[locale]}</p>
             <div class="flex flex-wrap gap-1.5 mb-5">
               {entry.data.stack.map(s => (
                 <span class="tag hover:animate-pulsing">{s}</span>
