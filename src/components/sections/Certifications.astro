@@ -1,12 +1,33 @@
 ---
 import { getDict } from '../../i18n'
 
-const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
+const t = getDict((Astro.currentLocale ?? 'en') as 'es' | 'en')
 
-const rarityColors: Record<string, string> = {
-  gold: 'text-gold',
-  silver: 'text-ink-dim',
+const entries = t.certifications.entries
+const total = entries.length
+const unlockedCount = entries.length
+
+const groups: { key: 'gold' | 'silver'; count: number }[] = [
+	{ key: 'gold', count: entries.filter((c) => c.rarity === 'gold').length },
+	{ key: 'silver', count: entries.filter((c) => c.rarity === 'silver').length },
+]
+
+const rarityStar: Record<'gold' | 'silver', string> = {
+	gold: '★',
+	silver: '☆',
 }
+
+const rarityTier: Record<'gold' | 'silver', string> = {
+	gold: t.certifications.tierGold,
+	silver: t.certifications.tierSilver,
+}
+
+const rarityRing: Record<'gold' | 'silver', string> = {
+	gold: 'border-gold',
+	silver: 'border-line-bright',
+}
+
+const progress = Math.round((unlockedCount / total) * 100)
 ---
 
 <section id="certs" class="py-16">
@@ -19,25 +40,66 @@ const rarityColors: Record<string, string> = {
       <span class="section-index">{t.certifications.sectionIndex}</span>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {
-        t.certifications.entries.map((c, i) => (
-          <div
-            class={`panel flex items-center gap-4 ${rarityColors[c.rarity]} scroll-reveal`}
-            style={`transition-delay:${i * 10}ms`}
-          >
-            <span class="font-pixel text-[18px] shrink-0 hover:animate-pulsing" aria-hidden="true">
-              {c.rarity === 'gold' ? '★' : '☆'}
-            </span>
-            <div>
-              <p class="font-pixel text-[7px] tracking-wider text-ink-low mb-1.5">
-                {t.certifications.achievement} {String(i + 1).padStart(2, '0')}
+    <div class="panel flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mb-8">
+      <div class="flex items-baseline gap-3 shrink-0">
+        <span class="font-pixel text-[18px] text-gold" aria-hidden="true">◆</span>
+        <p class="font-pixel text-[12px] sm:text-[14px] text-gold whitespace-nowrap">
+          {unlockedCount}/{total}
+        </p>
+      </div>
+      <div class="flex-1">
+        <div class="stat-bar" role="progressbar" aria-valuenow={unlockedCount} aria-valuemin={0} aria-valuemax={total} aria-label={t.certifications.title}>
+          <div class="stat-bar-fill gold" style={`width: ${progress}%`}></div>
+        </div>
+        <p class="font-mono text-[11px] tracking-wider text-ink-low mt-2">
+          {t.certifications.unlocked} {unlockedCount}/{total}
+        </p>
+      </div>
+    </div>
+
+    {
+      groups.map((g) => {
+        const list = entries.filter((c) => c.rarity === g.key)
+        if (list.length === 0) return null
+
+        return (
+          <div class="mb-8 last:mb-0">
+            <div class="flex items-center justify-between mb-3">
+              <p class="font-pixel text-[10px] tracking-wider text-ink-dim">
+                <span class={rarityStar[g.key] === '★' ? 'text-gold' : 'text-ink-dim'} aria-hidden="true">
+                  {rarityStar[g.key]}
+                </span>{' '}
+                {rarityTier[g.key]}
               </p>
-              <p class="text-[14px] text-ink font-medium">{c.title}</p>
+              <p class="font-mono text-[11px] tracking-wider text-ink-low">x{g.count}</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {
+                list.map((c, i) => (
+                  <div
+                    class={`flex items-center gap-4 p-4 sm:p-5 border-2 border-line-bright bg-panel ${rarityRing[g.key]} scroll-reveal`}
+                    style={`transition-delay:${i * 10}ms`}
+                  >
+                    <span
+                      class={`font-pixel text-[18px] shrink-0 ${rarityStar[g.key] === '★' ? 'text-gold' : 'text-ink-dim'} hover:animate-pulsing`}
+                      aria-hidden="true"
+                    >
+                      {rarityStar[g.key]}
+                    </span>
+                    <div>
+                      <p class="font-pixel text-[8px] tracking-wider text-ink-low mb-1.5">
+                        {t.certifications.achievement} {String(i + 1).padStart(2, '0')}
+                      </p>
+                      <p class="text-[14px] text-ink font-medium">{c.title}</p>
+                    </div>
+                  </div>
+                ))
+              }
             </div>
           </div>
-        ))
-      }
-    </div>
+        )
+      })
+    }
   </div>
 </section>

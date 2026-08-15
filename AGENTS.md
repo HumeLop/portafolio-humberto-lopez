@@ -7,8 +7,9 @@ pnpm dev              # Start dev server at localhost:4321
 pnpm build            # Build for production
 pnpm check            # Type-check project
 pnpm lint             # Lint all files
-pnpx biome check --write  # Format all files
 ```
+
+> Note: avoid `pnpx biome check --write`. `pnpx biome` may resolve the wrong binary; run formatting via the local one: `./node_modules/.bin/biome check --write .`
 
 ## Project structure
 
@@ -23,7 +24,7 @@ src/
 ├── i18n/                  # ES/EN dictionaries + helper
 ├── layouts/               # Layout.astro (OG tags, SEO, hreflang)
 ├── lib/                   # Types, constants
-├── pages/                 # Routes (index.astro handles both locales, 404)
+├── pages/                 # index.astro (EN default), es/index.astro, 404
 └── styles/                # Tailwind v4 tokens, components, animations
 ```
 

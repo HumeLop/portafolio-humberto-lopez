@@ -3,7 +3,7 @@ import { getDict } from '../../i18n'
 import { SOCIAL_LINKS } from '../../lib/constants'
 import Button from '../ui/Button.astro'
 
-const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
+const t = getDict((Astro.currentLocale ?? 'en') as 'es' | 'en')
 ---
 
 <section id="contact" class="py-16">
@@ -90,6 +90,7 @@ const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
           autocomplete="off"
         />
         <Button type="submit" variant="primary">{t.contact.btnSend}</Button>
+        <p class="sr-only" role="status" aria-live="polite" id="contact-status"></p>
       </form>
     </div>
   </div>
@@ -107,13 +108,21 @@ const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
       error: form.dataset.btnError || 'ERROR',
       noconn: form.dataset.btnNoconn || 'NO CONNECTION',
     }
+    const status = document.getElementById('contact-status')
+    const report = (msg: string) => {
+      if (status) status.textContent = msg
+    }
 
     form.addEventListener('submit', async e => {
       e.preventDefault()
 
-      const button = form.querySelector('button') as HTMLButtonElement
+      const button = form.querySelector('button') as HTMLButtonElement | null
+      if (!button) return
+
       button.disabled = true
+      button.classList.remove('success', 'failure')
       button.textContent = t.sending
+      report(t.sending)
 
       try {
         const formData = new FormData(form)
@@ -128,19 +137,25 @@ const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
 
         if (result.success) {
           button.textContent = t.sent
-          button.classList.add('btn', 'primary')
+          button.classList.add('success')
           form.reset()
+          report(t.sent)
           setTimeout(() => {
             button.textContent = t.send
+            button.classList.remove('success')
             button.disabled = false
           }, 3000)
         } else {
           button.textContent = t.error
+          button.classList.add('failure')
           button.disabled = false
+          report(t.error)
         }
       } catch {
         button.textContent = t.noconn
+        button.classList.add('failure')
         button.disabled = false
+        report(t.noconn)
       }
     })
   })()

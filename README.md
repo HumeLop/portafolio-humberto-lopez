@@ -6,7 +6,11 @@ Portafolio personal con estética pixel art / RPG gamer, construido con Astro, T
 
 ```text
 /
+├── .impeccable/                 # Críticas de diseño (impeccable skill)
+│   └── critique/
 ├── public/
+│   ├── CV_Humberto_Lopez_EN.pdf
+│   ├── CV_Humberto_Lopez_ES.pdf
 │   ├── favicon.ico
 │   ├── favicon.svg
 │   ├── fonts/                   # Fuentes self-hosted (.woff2, .ttf)

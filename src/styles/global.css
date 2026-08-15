@@ -122,6 +122,15 @@
   main, header, footer {
     @apply relative z-10;
   }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
 }
 
 @layer components {
@@ -194,6 +203,11 @@
     transform: translate(3px, 3px);
   }
 
+  .btn:disabled {
+    @apply opacity-60 cursor-not-allowed;
+    box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.4);
+  }
+
   .btn.primary {
     @apply bg-cyan border-cyan;
     color: #001a28;
@@ -205,6 +219,26 @@
     color: #001a28;
     border-color: #6dfcff;
     box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .btn.success {
+    @apply bg-green border-green;
+    color: #001a28;
+  }
+
+  .btn.success:hover {
+    @apply bg-green border-green;
+    color: #001a28;
+  }
+
+  .btn.failure {
+    @apply bg-red border-red;
+    color: #001a28;
+  }
+
+  .btn.failure:hover {
+    @apply bg-red border-red;
+    color: #001a28;
   }
 
   /* ── Tag / Badge ── */
@@ -316,26 +350,14 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .scroll-reveal {
+  html.js .scroll-reveal {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
 
-  .scroll-reveal.visible {
+  html.js .scroll-reveal.visible {
     opacity: 1;
     transform: translateY(0);
-  }
-
-  .panel:hover {
-    transform: translate(-2px, -2px);
-  }
-
-  .btn:hover {
-    transform: translate(-2px, -2px);
-  }
-
-  .btn:active {
-    transform: translate(3px, 3px);
   }
 }
