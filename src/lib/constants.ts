@@ -24,31 +24,31 @@ export const SKILL_STATS: SkillStat[] = [
 	{
 		id: 'STR',
 		title: 'Backend',
-		items: ['Java', 'Spring Boot', 'Python', 'PHP', 'Laravel'],
-		level: 5,
+		items: ['Java', 'Spring Boot', 'Node.js/Express', 'LoopBack', 'PHP', 'Laravel', 'Oracle APEX'],
+		level: 7,
 	},
 	{
 		id: 'DEX',
 		title: 'Frontend',
 		items: ['Angular', 'React', 'Vue', 'Ionic', 'TypeScript', 'JavaScript', 'HTML', 'CSS'],
-		level: 8,
+		level: 7,
 	},
 	{
 		id: 'INT',
 		title: 'Bases de datos',
-		items: ['Oracle · Apex', 'MariaDB', 'MongoDB', 'SQL Server', 'Firebase'],
-		level: 5,
+		items: ['Oracle', 'SQL Server', 'PostgreSQL', 'MariaDB', 'MongoDB', 'Firebase'],
+		level: 6,
 	},
 	{
 		id: 'WIS',
 		title: 'Control de versiones',
 		items: ['Git', 'GitLab', 'GitHub'],
-		level: 3,
+		level: 8,
 	},
 	{
 		id: 'CHA',
 		title: 'Metodologías',
 		items: ['Scrum'],
-		level: 1,
+		level: 6,
 	},
 ]

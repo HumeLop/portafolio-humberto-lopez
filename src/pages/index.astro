@@ -11,7 +11,7 @@ import Footer from '../components/shared/Footer.astro'
 import Header from '../components/shared/Header.astro'
 import Layout from '../layouts/Layout.astro'
 
-const locale = (Astro.currentLocale ?? 'es') as 'es' | 'en'
+const locale = (Astro.currentLocale ?? 'en') as 'es' | 'en'
 const title =
   locale === 'es' ? 'Humberto Lopez — Fullstack Developer' : 'Humberto Lopez — Fullstack Developer'
 const description =
@@ -27,8 +27,8 @@ const description =
     <About />
     <Skills />
     <Experience />
-    <Education />
     <Projects />
+    <Education />
     <Certifications />
     <Contact />
   </main>

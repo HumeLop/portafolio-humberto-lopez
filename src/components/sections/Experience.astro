@@ -1,7 +1,9 @@
 ---
 import { getDict } from '../../i18n'
 
-const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
+const t = getDict((Astro.currentLocale ?? 'en') as 'es' | 'en')
+const locale = (Astro.currentLocale ?? 'en') as 'es' | 'en'
+const cvPdf = locale === 'es' ? '/CV_Humberto_Lopez_ES.pdf' : '/CV_Humberto_Lopez_EN.pdf'
 ---
 
 <section id="experience" class="py-16">
@@ -29,11 +31,11 @@ const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
               <div class="flex items-center justify-between gap-3 mb-1.5">
                 <h3 class="text-[15px] font-normal">{q.company}</h3>
                 {q.active ? (
-                  <span class="font-pixel text-[7px] text-green tracking-wider border-2 border-green px-2 py-0.5">
+                  <span class="font-pixel text-[9px] text-green tracking-wider border-2 border-green px-2 py-0.5">
                     {t.experience.inProgress}
                   </span>
                 ) : (
-                  <span class="font-pixel text-[7px] text-ink-low tracking-wider border-2 border-line-bright px-2 py-0.5">
+                  <span class="font-pixel text-[9px] text-ink-low tracking-wider border-2 border-line-bright px-2 py-0.5">
                     {t.experience.completed}
                   </span>
                 )}
@@ -51,6 +53,16 @@ const t = getDict((Astro.currentLocale ?? 'es') as 'es' | 'en')
                     </li>
                   ))}
                 </ul>
+                {i === 0 && (
+                  <a
+                    href={cvPdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 font-mono text-[12px] text-cyan mt-4 hover:underline decoration-dotted decoration-2 underline-offset-4"
+                  >
+                    {t.experience.detailsCta} <span aria-hidden="true">▸</span>
+                  </a>
+                )}
               </div>
             </div>
           </div>
