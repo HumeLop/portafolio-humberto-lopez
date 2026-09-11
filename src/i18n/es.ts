@@ -70,11 +70,12 @@ const dict = {
 			{
 				company: 'Stefanini México — Audi México',
 				role: 'Fullstack Developer',
-				period: 'OCT 2022 — JUL 2026',
+				period: 'OCT 2022 — AGO 2026',
 				active: false,
 				objectives: [
 					'"Concepto de Emergencia" de la app LLA: proceso de entrega de material que mantiene la producción activa cuando cae la conexión con Alemania',
-					'+580 tickets resueltos: cargas de archivos entregadas en menos de 1 día y nuevos requerimientos en 1-2 días',
+					'Atención y resolución de incidentes garantizando la continuidad operativa de los ambientes productivos, documentados en la plataforma SC3',
+					'Coordinación y ejecución de eventos de liberación (releases) y hotfixes en ambientes productivos',
 					'Mantenimiento de 9 aplicaciones en producción (Vue + LoopBack, Angular 18 + Express.js, Oracle APEX)',
 					'Reconstrucción en solitario de Online Monitoring: migración a Angular v18 con interfaz renovada',
 				],
